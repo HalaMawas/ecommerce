@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class category extends Model
 {
     use HasFactory;
+    protected $fillable=['name_en','name_ar','image','parent_id'];
+    public $timstamp=false;
 }
