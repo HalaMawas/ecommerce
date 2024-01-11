@@ -12,4 +12,7 @@ class Category extends Model
     protected $fillable=['name_ar','name_en','image','parent_id'];
     public $timestamps=false;
 
+    public function Products(){
+        return $this->hasMany('App\Models\Product');
+    }
 }

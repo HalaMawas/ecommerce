@@ -10,4 +10,8 @@ class Brand extends Model
     use HasFactory;
     protected $fillable=['name_ar','name_en','image'];
     public $timestamps=false;
+
+    public function Products(){
+        return $this->hasMany('App\Models\Product');
+    }
 }
