@@ -21,6 +21,12 @@ return new class extends Migration
             $table->string('description_en');
             $table->string('image');
             $table->string('price');
+            $table->bigInteger('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('brand_id')->unsigned();
+            $table->foreign('brand_id')->references('id')->on('brands')
+            ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
