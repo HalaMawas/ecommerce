@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Traits\ImageTrait;
 
 class BrandController extends Controller
 {
+    use ImageTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands=Brand::all();
+        return view('backend.brand.index',compact('brands'));
     }
 
     /**
@@ -35,7 +40,19 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name_ar' => ['required','unique:brands'],
+            'name_en' => ['required','unique:brands'],
+            'image' => ['required'],
+        ])->validate();
+      
+        $brand = new Brand();
+        $brand->name_ar=$request->name_ar;
+        $brand->name_en=$request->name_en;
+        $brand->image= $this->verifyAndUpload($request, 'image', 'Brandimage');
+    
+        $brand->save();
+        return redirect()->back()->with('success','تمت الاضافة بنجاح');
     }
 
     /**
