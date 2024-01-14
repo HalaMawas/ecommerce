@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Traits\ImageTrait;
 
 class ProductController extends Controller
 {
+    use ImageTrait;
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +28,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::whereNotNull('parent_id')->get();
+        $brands=Brand::all();
+        return view('backend.product.create',compact('categories','brands'));
     }
 
     /**
@@ -35,7 +41,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->image= $this->verifyAndUpload($request, 'image', 'Productimage');
+        $product=Product::create($request->all());
+        return redirect()->back()->with('success','تمت الاضافة بنجاح');
+
+
     }
 
     /**
