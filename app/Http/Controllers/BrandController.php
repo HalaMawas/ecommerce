@@ -74,7 +74,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('backend.brand.edit',compact('brand'));
     }
 
     /**
@@ -86,7 +86,17 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $brand->update(['name_ar'=>$request->name_ar,'name_en'=>$request->name_en]);
+
+        if (!empty ($request->file('image'))) {
+            if(\File::exists(public_path('Brandimage/').$brand->image)){
+                \File::delete(public_path('Brandimage/').$brand->image);
+            }
+            $imageName=$this->verifyAndUpload($request, 'image', 'Brandimage');
+            $brand->update(['image'=> $imageName]);
+        }
+        return redirect()->back()->with('success','تم التعديل بنجاح');
+
     }
 
     /**
