@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('brand',BrandController::class);
+Route::resource('category',CategoryController::class);

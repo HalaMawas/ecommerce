@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use App\Traits\ImageTrait;
 class CategoryController extends Controller
 {
+    use ImageTrait;
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories= Category::whereNull('parent_id')->get();
+        return view("backend.category.create",compact('categories'));
     }
 
     /**
@@ -35,7 +38,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name_ar' => ['required','unique:categories'],
+            'name_en' => ['required','unique:categories'],
+            'image' => ['required'],
+        ])->validate();
+      
+        $category = new Category();
+        $category->name_ar=$request->name_ar;
+        $category->name_en=$request->name_en;
+        $category->image= $this->verifyAndUpload($request, 'image', 'Categoryimage');
+        $category->parent_id=$request->parent_id;
+        $category->save();
+        return redirect()->back()->with('success','تمت الاضافة بنجاح');
     }
 
     /**
