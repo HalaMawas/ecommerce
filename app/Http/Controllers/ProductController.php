@@ -18,7 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products=Product::all();
+        return view("backend.product.index",compact("products"));
     }
 
     /**
@@ -28,7 +29,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories=Category::whereNotNull('parent_id')->get();
+        $categories=Category::all();
         $brands=Brand::all();
         return view('backend.product.create',compact('categories','brands'));
     }
@@ -41,8 +42,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->image= $this->verifyAndUpload($request, 'image', 'Productimage');
+        $imageName= $this->verifyAndUpload($request, 'image', 'Productimage');
         $product=Product::create($request->all());
+        $product->update(['image'=>$imageName]);
         return redirect()->back()->with('success','تمت الاضافة بنجاح');
 
 
@@ -67,7 +69,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories=Category::all();
+        $brands=Brand::all();
+        return view('backend.product.edit',compact('product','categories','brands'));
     }
 
     /**
