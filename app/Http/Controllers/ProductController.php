@@ -83,7 +83,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product=Product::update($request->all());
+        if (!empty ($request->file('image'))) {
+            if(\File::exists(public_path('Productimage/').$product->image)){
+                \File::delete(public_path('Productimage/').$product->image);
+            }
+            $imageName= $this->verifyAndUpload($request, 'image', 'Productimage');
+            $product->update(['image'=>$imageName]);
+        }
+        return redirect()->back()->with('success','تم التعديل بنجاح');
     }
 
     /**
