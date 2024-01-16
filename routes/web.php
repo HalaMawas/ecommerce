@@ -18,6 +18,9 @@ use App\Http\Controllers\MainController;
 */
 
 Route::get('/', [MainController::class,'index'])->name('home');
+Route::get('get-product/{category}', [MainController::class,'getProducts']);
+Route::get('get-product', [MainController::class,'getallProducts']);
+
 
 Route::resource('brand',BrandController::class);
 Route::resource('category',CategoryController::class);

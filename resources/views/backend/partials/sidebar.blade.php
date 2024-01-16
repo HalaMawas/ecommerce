@@ -24,8 +24,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link ">
+          <li class="nav-item has-treeview @if(Request::is('brand*')) menu-open @endif">
+            <a href="#" class="nav-link @if(Request::is('brand*')) active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Brand
@@ -33,14 +33,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('brand/create')}}" class="nav-link ">
+              <li class="nav-item ">
+                <a href="{{url('brand/create')}}" class="nav-link @if(Request::is('brand/create')) active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Brand</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('brand')}}" class="nav-link ">
+                <a href="{{url('brand')}}" class="nav-link @if(Request::is('brand')||Request::is('brand/*/edit')) active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Brand</p>
                 </a>
@@ -50,8 +50,8 @@
             </ul>
             
           </li>
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link ">
+          <li class="nav-item has-treeview @if(Request::is('category*')) menu-open @endif">
+            <a href="#" class="nav-link @if(Request::is('category*')) active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Category
@@ -59,14 +59,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('category/create')}}" class="nav-link ">
+              <li class="nav-item  ">
+                <a href="{{url('category/create')}}" class="nav-link @if(Request::is('category/create')) active @endif ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Category</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('category')}}" class="nav-link ">
+                <a href="{{url('category')}}" class="nav-link @if(Request::is('category')||Request::is('category/*/edit')) active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Categories</p>
                 </a>
@@ -76,8 +76,8 @@
             </ul>
             
           </li>
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link ">
+          <li class="nav-item has-treeview @if(Request::is('product*')) menu-open @endif">
+            <a href="#" class="nav-link @if(Request::is('product*')) active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Product
@@ -86,13 +86,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{url('product/create')}}" class="nav-link ">
+                <a href="{{url('product/create')}}" class="nav-link @if(Request::is('product/create')) active @endif ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('product')}}" class="nav-link ">
+                <a href="{{url('product')}}" class="nav-link @if(Request::is('product')||Request::is('product/*/edit')) active @endif ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Products</p>
                 </a>

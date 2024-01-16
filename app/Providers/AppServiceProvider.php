@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
@@ -27,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('allCategories',
         Category::whereNull('parent_id')->get());
+        Paginator::useBootstrapFive();
     }
 }

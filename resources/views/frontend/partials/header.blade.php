@@ -74,14 +74,14 @@
                         
                             @foreach($allCategories as $Category)
                                 @if(count($Category->children)==0)
-                                <a href="" class="nav-item nav-link">{{$Category->name_en}}</a>
+                                <a href='{{url("get-product/{$Category->id}")}}' class="nav-item nav-link">{{$Category->name_en}}</a>
 
                                 @else
                                 <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">{{$Category->name_en}} <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href='{{url("get-product/{$Category->id}")}}' class="nav-link" data-toggle="dropdown">{{$Category->name_en}} <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 @foreach($Category->children as $subcategory)
-                                <a href="" class="dropdown-item">{{$subcategory->name_en}}</a>
+                                <a href='{{url("get-product/{$subcategory->id}")}}' class="dropdown-item">{{$subcategory->name_en}}</a>
                                 @endforeach
                                 
                             </div>
@@ -103,17 +103,9 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{{url('/')}}" class="nav-item nav-link @if(Request::is('/')) active @endif">Home</a>
+                            <a href="{{url('get-product')}}" class="nav-item nav-link @if(Request::is('get-product*')) active @endif">Shop</a>
+                            
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <a href="" class="nav-item nav-link">Login</a>
