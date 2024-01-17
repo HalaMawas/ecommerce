@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Product;
+use Illuminate\Support\Facades\App;
+
 class MainController extends Controller
 {
     public function index(){
-        $categories=Category::whereNotNull('parent_id')->withCount(['products'])->get();
+        $lang = App::currentLocale();
+        $categories=Category::whereNotNull('parent_id')->withCount(['products'])
+        ->select('name_'.$lang.' as name','image')->get();
         $brands=Brand::all();
         return view("frontend.index",compact("categories",'brands'));
     }

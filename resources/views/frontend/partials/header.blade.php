@@ -39,7 +39,7 @@
             <div class="col-lg-6 col-6 text-left">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control" placeholder="{{__('app.search')}}">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -74,11 +74,11 @@
                         
                             @foreach($allCategories as $Category)
                                 @if(count($Category->children)==0)
-                                <a href='{{url("get-product/{$Category->id}")}}' class="nav-item nav-link">{{$Category->name_en}}</a>
+                                <a href='{{url("get-product/{$Category->id}")}}' class="nav-item nav-link">{{$Category->name}}</a>
 
                                 @else
                                 <div class="nav-item dropdown">
-                            <a href='{{url("get-product/{$Category->id}")}}' class="nav-link" data-toggle="dropdown">{{$Category->name_en}} <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href='{{url("get-product/{$Category->id}")}}' class="nav-link" data-toggle="dropdown">{{$Category->name}} <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 @foreach($Category->children as $subcategory)
                                 <a href='{{url("get-product/{$subcategory->id}")}}' class="dropdown-item">{{$subcategory->name_en}}</a>
@@ -103,13 +103,14 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{{url('/')}}" class="nav-item nav-link @if(Request::is('/')) active @endif">Home</a>
-                            <a href="{{url('get-product')}}" class="nav-item nav-link @if(Request::is('get-product*')) active @endif">Shop</a>
+                            <a href="{{url('/')}}" class="nav-item nav-link @if(Request::is('/')) active @endif">{{__('app.home')}}</a>
+                            <a href="{{url('get-product')}}" class="nav-item nav-link @if(Request::is('get-product*')) active @endif">{{__('app.shop')}}</a>
                             
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
+                            <a href="{{url('change-lang')}}" class="nav-item nav-link">{{__('app.lang')}}</a>
+                            <a href="" class="nav-item nav-link">{{__('app.login')}}</a>
+                            <a href="" class="nav-item nav-link">{{__('app.register')}}</a>
                         </div>
                     </div>
                 </nav>

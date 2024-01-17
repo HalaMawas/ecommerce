@@ -6,6 +6,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\App;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,8 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $lang = App::currentLocale();
         View::share('allCategories',
-        Category::whereNull('parent_id')->get());
+        Category::whereNotNull('parent_id')->withCount(['products'])
+        ->select('name_'.$lang.' as name','image')->get()
+    );
         Paginator::useBootstrapFive();
     }
 }

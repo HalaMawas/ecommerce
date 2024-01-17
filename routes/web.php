@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MainController;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,16 @@ Route::get('get-product', [MainController::class,'getallProducts']);
 Route::resource('brand',BrandController::class);
 Route::resource('category',CategoryController::class);
 Route::resource('product',ProductController::class);
+
+Route::get('change-lang',function(){
+    $locale = App::currentLocale();
+ 
+    if ($locale=='ar') {
+        app()->setLocale('en');
+    }else{
+        app()->setLocale('ar');   
+     }
+     $locale = App::currentLocale();
+        session()->put('locale', $locale);
+        return redirect()->back();
+});

@@ -42,7 +42,7 @@
                     <a href="" class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" src='{{asset("Categoryimage/{$category->image}")}}' alt="">
                     </a>
-                    <h5 class="font-weight-semi-bold m-0">{{$category->name_en}}</h5>
+                    <h5 class="font-weight-semi-bold m-0">{{$category->name}}</h5>
                 </div>
             </div>
             @endforeach
